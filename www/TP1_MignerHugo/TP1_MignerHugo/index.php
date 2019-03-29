@@ -32,7 +32,7 @@
 
 <form action="facture_post.php" method="post">
     <p>
-        <label for="id">ID</label> : <input type="text" name="id" id="nom" /><br />
+        <!--<label for="id">ID</label> : <input type="text" name="id" id="nom" /><br />-->
         <label for="compteid">CompteID</label> : <input type="text" name="compte_id" id="nom" /><br />
         <label for="commentaire">Commentaire</label> : <input type="text" name="commentaire" id="nom" /><br />
         Balance approximative : <br />
