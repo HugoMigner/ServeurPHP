@@ -26,6 +26,12 @@ SET time_zone = "+00:00";
 -- Structure de la table `compte`
 --
 
+DROP TABLE IF EXISTS transactions;
+
+DROP TABLE IF EXISTS compte;
+
+DROP TABLE IF EXISTS users;
+
 CREATE TABLE `compte` (
   `id` int(11) NOT NULL,
   `users_id` int(11) NOT NULL,
@@ -60,8 +66,8 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`id`, `compte_id`, `montant`, `commentaire`, `retard`) VALUES
-(1, 1, '250', 'Facture mensuelle de Gerald', 'Non'),
-(2, 2, '240', 'Facture mensuelle de Pauline', 'Non'),
+(1, 1, '200', 'Facture mensuelle de Gerald', 'Non'),
+(2, 2, '300', 'Facture mensuelle de Pauline', 'Non'),
 (3, 2, '400', 'Achat d\'un téléphone', 'Oui');
 
 -- --------------------------------------------------------
