@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1:3306
--- Généré le :  Jeu 21 Février 2019 à 15:54
+-- Généré le :  Ven 29 Mars 2019 à 18:37
 -- Version du serveur :  5.6.35
 -- Version de PHP :  7.1.1
 
@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `compte` (
-  `id` int(11) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL,
   `users_id` int(11) NOT NULL,
   `nom_compte` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `balance` int(11) NOT NULL
@@ -38,7 +38,8 @@ CREATE TABLE `compte` (
 --
 
 INSERT INTO `compte` (`id`, `users_id`, `nom_compte`, `balance`) VALUES
-(0, 0, 'le compte a jean paul', 1500);
+(1, 1, 'GeraldCompte', 1500),
+(2, 2, 'PaulineCompte', 2500);
 
 -- --------------------------------------------------------
 
@@ -47,12 +48,21 @@ INSERT INTO `compte` (`id`, `users_id`, `nom_compte`, `balance`) VALUES
 --
 
 CREATE TABLE `transactions` (
-  `id` int(11) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL,
   `compte_id` int(11) NOT NULL,
   `montant` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `commentaire` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `retard` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `compte_id`, `montant`, `commentaire`, `retard`) VALUES
+(1, 1, '250', 'Facture mensuelle de Gerald', 'Non'),
+(2, 2, '240', 'Facture mensuelle de Pauline', 'Non'),
+(3, 2, '400', 'Achat d\'un téléphone', 'Oui');
 
 -- --------------------------------------------------------
 
@@ -61,10 +71,10 @@ CREATE TABLE `transactions` (
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL,
   `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `adresse` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `num_telephone` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `num_tel` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `modele` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -73,8 +83,9 @@ CREATE TABLE `users` (
 -- Contenu de la table `users`
 --
 
-INSERT INTO `users` (`id`, `nom`, `adresse`, `num_telephone`, `email`, `modele`) VALUES
-(0, 'Jean Paul', 'white house', '911', 'coolmanjp@gmail.com', 'panasonic');
+INSERT INTO `users` (`id`, `nom`, `adresse`, `num_tel`, `email`, `modele`) VALUES
+(1, 'Gerald', '1799 Boul. Bellerose', '450-999-9999', 'gerald@gmail.com', 'Panasonic'),
+(2, 'Pauline', '288 Rue Stalagmite', '514-778-7488', 'pauline@gmail.com', 'V-Tech');
 
 --
 -- Index pour les tables exportées
@@ -92,7 +103,7 @@ ALTER TABLE `compte`
 --
 ALTER TABLE `transactions`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `comptes_id` (`compte_id`);
+  ADD KEY `compte_id` (`compte_id`);
 
 --
 -- Index pour la table `users`
@@ -100,6 +111,25 @@ ALTER TABLE `transactions`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `compte`
+--
+ALTER TABLE `compte`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `transactions`
+--
+ALTER TABLE `transactions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Contraintes pour les tables exportées
 --
