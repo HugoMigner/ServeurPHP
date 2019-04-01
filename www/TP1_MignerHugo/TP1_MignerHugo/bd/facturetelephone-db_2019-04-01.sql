@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1:3306
--- Généré le :  Ven 29 Mars 2019 à 18:37
+-- Généré le :  Lun 01 Avril 2019 à 15:58
 -- Version du serveur :  5.6.35
 -- Version de PHP :  7.1.1
 
@@ -20,17 +20,16 @@ SET time_zone = "+00:00";
 -- Base de données :  `facturetelephone`
 --
 
+DROP TABLE IF EXISTS codeRabais;
+DROP TABLE IF EXISTS transactions;
+DROP TABLE IF EXISTS compte;
+DROP TABLE IF EXISTS users;
+
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `compte`
 --
-
-DROP TABLE IF EXISTS transactions;
-
-DROP TABLE IF EXISTS compte;
-
-DROP TABLE IF EXISTS users;
 
 CREATE TABLE `compte` (
   `id` int(11) NOT NULL,
@@ -94,6 +93,25 @@ INSERT INTO `users` (`id`, `nom`, `adresse`, `num_tel`, `email`, `modele`) VALUE
 (2, 'Pauline', '288 Rue Stalagmite', '514-778-7488', 'pauline@gmail.com', 'V-Tech');
 
 --
+-- Structure de la table `coderabais`
+--
+
+CREATE TABLE `coderabais` (
+  `id` int(11) NOT NULL,
+  `transaction_id` int(11) NOT NULL,
+  `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `pourcentage` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `coderabais`
+--
+
+INSERT INTO `coderabais` (`id`, `transaction_id`, `nom`, `pourcentage`) VALUES
+(1, 1, 'Rabais pour les nouveaux clients', 10),
+(2, 2, 'Rabais avec un coupon dans un magazine', 15);
+
+--
 -- Index pour les tables exportées
 --
 
@@ -117,6 +135,10 @@ ALTER TABLE `transactions`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
+ALTER TABLE `coderabais`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `transaction_id` (`transaction_id`);
+
 --
 -- AUTO_INCREMENT pour les tables exportées
 --
@@ -136,6 +158,9 @@ ALTER TABLE `transactions`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+ALTER TABLE `coderabais`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Contraintes pour les tables exportées
 --
@@ -151,6 +176,9 @@ ALTER TABLE `compte`
 --
 ALTER TABLE `transactions`
   ADD CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`compte_id`) REFERENCES `compte` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `coderabais`
+  ADD CONSTRAINT `coderabais_ibfk_1` FOREIGN KEY (`transaction_id`) REFERENCES `transactions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
