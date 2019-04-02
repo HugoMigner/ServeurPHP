@@ -15,7 +15,7 @@
     <h1 id="titreCoupons">Coupons rabais associés à la transaction #<?= $transaction['id'] ?> :</h1>
 </header>
 <?php foreach ($codesrabais as $coderabais): ?>
-    <p><a href="../index.php?action=confirmer&id=<?= $coderabais['id'] ?>" >
+    <p><a href="index.php?action=confirmer&id=<?= $coderabais['id'] ?>" >
             [Supprimer]
         </a>
         Coupon #<?= $coderabais['id'] ?> pour la transaction #<?= $transaction['id'] ?>, <?= $coderabais['nom'] ?>
@@ -29,8 +29,8 @@
 <form action="index.php?action=coderabais" method="post">
     <h2>Ajouter un coupon rabais</h2>
     <p>
-        <label for="transaction_id">ID de la transaction</label> : <input type="text" name="compte_id" id="nom" /><br />
-        <label for="nom">Description du coupon</label> : <input type="text" name="commentaire" id="nom" /><br />
+        <label for="transaction_id">ID de la transaction</label> : <input type="text" name="transaction_id" id="transaction_id"/><br />
+        <label for="nom">Description du coupon</label> : <input type="text" name="nom" id="nom" /><br />
         Pourcentage de rabais :
         <select name="pourcentage">
             <option value="10">10</option>
@@ -44,7 +44,8 @@
             <option value="50">50</option>
         </select>
         <br />
-        <input type="submit" value="Envoyer" />
+        <input type="hidden" name="transaction_id" value="<?= $transaction['id']?>" />
+        <input type="submit" value="Ajouter" />
     </p>
 </form>
 

@@ -9,6 +9,7 @@
     </head>
     <body>
         <div id="global">
+            <a href="apropos.html">À propos</a>
             <header>
                 <a href="../TP1_MignerHugo/index.php"><h1 id="titreSite">Gestionnaire de transactions, Compagnie Téléphonie</h1></a>
                 <p>Gestion des transactions</p>

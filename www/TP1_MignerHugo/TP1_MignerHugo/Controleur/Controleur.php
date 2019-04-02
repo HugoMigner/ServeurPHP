@@ -14,8 +14,7 @@ function transaction($idTransaction, $erreur) {
 }
 
 function codeRabais($coderabais) {
-    $validation_courriel = filter_var($coderabais['id'], FILTER_VALIDATE_EMAIL);
-    if ($validation_courriel) {
+    if (!filter_var($coderabais['transaction_id'], FILTER_VALIDATE_INT) === false) {
         setCodeRabais($coderabais);
         header('Location: index.php?action=transaction&id=' . $coderabais['transaction_id']);
     } else {
@@ -31,15 +30,15 @@ function confirmer($id) {
 function supprimer($id) {
     $coderabais = getCodeRabais($id);
     deleteCodeRabais($id);
-    header('Location: index.php?action=article&id=' . $coderabais['article_id']);
+    header('Location: index.php?action=transaction&id=' . $coderabais['transaction_id']);
 }
 
 function nouvelleTransaction() {
     require 'Vue/vueAjouter.php';
 }
 
-function ajouter($coderabais) {
-    setCodeRabais($coderabais);
+function ajouter($transaction) {
+    setTransaction($transaction);
     header('Location: index.php');
 }
 

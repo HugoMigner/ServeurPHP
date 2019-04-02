@@ -1,8 +1,8 @@
 <?php $titre = 'Transactions Telephone'; ?>
 
 <?php ob_start(); ?>
-    <a href="../index.php?action=nouvelleTransaction">
-        <h2 class="titreTransaction">Ajouter un article</h2>
+    <a href="index.php?action=nouvelleTransaction">
+        <h2 class="titreTransaction">Ajouter une transaction</h2>
     </a>
 <?php foreach ($transactions as $transaction):
     ?>

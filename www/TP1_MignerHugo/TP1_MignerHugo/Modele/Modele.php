@@ -7,9 +7,9 @@ function getBdd() {
 
 function getTransactions() {
     $bdd = getBdd();
-    $articles = $bdd->query('select * from transactions'
+    $transactions = $bdd->query('select * from transactions'
         . ' order by id desc');
-    return $articles;
+    return $transactions;
 }
 
 function setTransaction($transaction) {
